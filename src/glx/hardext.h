@@ -1,3 +1,7 @@
+
+
+#include "../gl/program.h"
+
 #ifndef _GLX_HARDEXT_H_
 #define _GLX_HARDEXT_H_
 
@@ -63,10 +67,12 @@ typedef struct _hardext {
     int glsl120;        // does version 120 glsl shader are supported ?
     int glsl300es;      // does version 300es glsl shader are supported ?
     int glsl310es;      // does version 300es glsl shader are supported ?
+    int glsl320es;      // VGPU specific ; does version 320es glsl shader are supported ?
 } hardext_t;
 
-extern hardext_t hardext;
+extern hardext_t hardext __attribute__((visibility("default")));
 
 void GetHardwareExtensions(int test);
+int testGenericShader(struct shader_s * shader_source);
 
 #endif

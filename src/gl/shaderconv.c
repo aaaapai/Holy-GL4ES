@@ -8,6 +8,7 @@
 #include "preproc.h"
 #include "string_utils.h"
 #include "shader_hacks.h"
+#include "logs.h"
 
 typedef struct {
     const char* glname;
@@ -277,8 +278,9 @@ static const char* gl_TexMatrixSources[] = {
 static const char* GLESHeader[] = {
   "#version 100\n%sprecision %s float;\nprecision %s int;\n",
   "#version 120\n%sprecision %s float;\nprecision %s int;\n",
-  "#version 310es\n%sprecision %s float;\nprecision %s int;\n",
-  "#version 300es\n%sprecision %s float;\nprecision %s int;\n"
+  "#version 310 es\n%sprecision %s float;\nprecision %s int;\n",
+  "#version 300 es\n%sprecision %s float;\nprecision %s int;\n",
+  "#version 320 es\n%sprecision %s float;\nprecision %s int;\n"
 };
 
 static const char* gl4es_transpose =
@@ -429,7 +431,7 @@ static const char* gl4es_VertexAttrib = "_gl4es_VertexAttrib_";
 char gl_VA[MAX_VATTRIB][32] = {0};
 char gl4es_VA[MAX_VATTRIB][32] = {0};
 
-char* ConvertShader(const char* pEntry, int isVertex, shaderconv_need_t *need)
+char* ConvertShader(const char* pEntry, int isVertex, shaderconv_need_t *need, int forwardPort)
 {
   if(gl_VA[0][0]=='\0') {
     for (int i=0; i<MAX_VATTRIB; ++i) {
@@ -482,10 +484,12 @@ char* ConvertShader(const char* pEntry, int isVertex, shaderconv_need_t *need)
   int wanthighp = !fpeShader;
   if(wanthighp && !hardext.highp) wanthighp = 0;
   int versionHeader = 0;
-  if(versionString && strcmp(versionString, "120")==0)
-     version120 = 1;
+  SHUT_LOGD("version string: %s", versionString);
+  if(versionString && (strcmp(versionString, "120")==0 || strstr(versionString, "150") != NULL))
+     version120 = forwardPort ? 1 : 0;
   if(version120) {
     if(hardext.glsl120) versionHeader = 1;
+    else if(hardext.glsl320es) versionHeader = 4;
     else if(hardext.glsl310es) versionHeader = 2;
     else if(hardext.glsl300es) { versionHeader = 3; /* location on uniform not supported ! */ }
     /* else no location or in / out are supported */
@@ -1200,6 +1204,14 @@ char* ConvertShader(const char* pEntry, int isVertex, shaderconv_need_t *need)
   if(strstr(Tmp, "mat3x3")) {
     // better to use #define ?
     Tmp = InplaceReplace(Tmp, &tmpsize, "mat3x3", "mat3");
+  }
+
+  if (versionHeader > 1) {
+    const char* GLESBackport = "#define texture2D texture\n#define attribute in\n#define varying out\n";
+    Tmp = InplaceInsert(GetLine(Tmp, 1), GLESBackport, Tmp, &tmpsize);
+  }else {
+      const char* GLESForwardPort = "#define texture texture2D\n #define textureProj texture2DProj\n #define mod(a,b) (int(a) - int(b) * int(a/b))\n";
+      Tmp = InplaceInsert(GetLine(Tmp, 1), GLESForwardPort, Tmp, &tmpsize);
   }
   
   // finish
