@@ -8,7 +8,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := GL_gl4es
+LOCAL_MODULE := gl4es
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 
@@ -87,7 +87,7 @@ LOCAL_SRC_FILES := \
 	src/glx/lookup.c \
 	src/glx/gbm.c \
 	src/glx/streaming.c \
-	src/gl/vgpu/shaderconv.c\
+	src/gl/vgpu/shaderconv.c
 
 LOCAL_CFLAGS += -g -std=gnu99 -funwind-tables -O3 -fvisibility=hidden -include include/android_debug.h
 LOCAL_CFLAGS += -DNOX11
@@ -102,7 +102,7 @@ include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := EGL_gl4es
+LOCAL_MODULE := gl4es_egl
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 
@@ -110,11 +110,11 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES) -DBCMHOST
 
 LOCAL_SRC_FILES := \
 	src/egl/egl.c \
-    src/egl/lookup.c\
+                src/egl/lookup.c
 
 LOCAL_CFLAGS += -g -std=gnu99 -funwind-tables -O3 -fvisibility=hidden
 
-LOCAL_SHARED_LIBRARIES :=GL_gl4es
+LOCAL_SHARED_LIBRARIES := gl4es
 
 LOCAL_LDLIBS := -ldl
 
