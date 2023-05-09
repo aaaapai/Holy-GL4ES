@@ -316,7 +316,7 @@ static const char* HackAltMax =
 "}\n"
 "float max(int a, float b) {\n"
 " return max(float(a), b);\n"
-"}\n";
+"}\n"
 "int max(int a, int b) {\n"
 " return int(max(float(a), float(b)));\n"
 "}\n";
@@ -326,7 +326,7 @@ static const char* HackAltMin =
 "}\n"
 "float min(int a, float b) {\n"
 " return min(float(a), b);\n"
-"}\n";
+"}\n"
 "int min(int a, int b) {\n"
 " return int(min(float(a), float(b)));\n"
 "}\n";
