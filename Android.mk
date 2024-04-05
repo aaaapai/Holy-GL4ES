@@ -8,7 +8,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := GL
+LOCAL_MODULE := gl4es
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 
@@ -102,4 +102,6 @@ LOCAL_CFLAGS += -Wno-typedef-redefinition -Wno-dangling-else
 LOCAL_LDLIBS := -ldl -llog
 #building as a static lib
 
-include $(BUILD_STATIC_LIBRARY)
+include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
