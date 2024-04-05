@@ -16,6 +16,7 @@
 #include "init.h"
 #include "loader.h"
 #include "matrix.h"
+#include "buffers.h"
 #ifdef _WIN32
 #ifdef _WINBASE_
 #define GSM_CAST(c) ((LPFILETIME)c)
@@ -1172,14 +1173,14 @@ void gl4es_scratch_vertex(int alloc) {
     LOAD_GLES(glBufferData);
     LOAD_GLES(glGenBuffers);
     if(!glstate->scratch_vertex) {
-        glGenBuffers(1, &glstate->scratch_vertex);
+        gles_glGenBuffers(1, &glstate->scratch_vertex);
     }
     if(glstate->scratch_vertex_size < alloc) {
 #ifdef AMIGAOS4
         LOAD_GLES(glDeleteBuffers);
         GLuint old_buffer = glstate->scratch_vertex;
-        glGenBuffers(1, &glstate->scratch_vertex);
-        gles_glDeleteBuffers(1, &old_buffer);
+        gles_glGenBuffers(1, &glstate->scratch_vertex);
+        deleteSingleBuffer(old_buffer);
 #endif
         bindBuffer(GL_ARRAY_BUFFER, glstate->scratch_vertex);
         gles_glBufferData(GL_ARRAY_BUFFER, alloc, NULL, GL_STREAM_DRAW);
@@ -1196,7 +1197,7 @@ void gl4es_scratch_indices(int alloc) {
     LOAD_GLES(glBufferData);
     LOAD_GLES(glGenBuffers);
     if(!glstate->scratch_indices) {
-        glGenBuffers(1, &glstate->scratch_indices);
+        gles_glGenBuffers(1, &glstate->scratch_indices);
     }
     bindBuffer(GL_ELEMENT_ARRAY_BUFFER, glstate->scratch_indices);
     if(glstate->scratch_indices_size < alloc) {

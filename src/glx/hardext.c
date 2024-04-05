@@ -362,7 +362,11 @@ void GetHardwareExtensions(int notest)
         gles_glGetIntegerv(GL_MAX_VERTEX_ATTRIBS, &hardext.maxvattrib);
         SHUT_LOGD("Max vertex attrib: %d\n", hardext.maxvattrib);
         S("GL_OES_standard_derivatives ", derivatives, 1);
+        S("GL_ARM_shader_framebuffer_fetch", shader_fbfetch, 1);
         S("GL_OES_get_program ", prgbinary, 1);
+        if(!hardext.prgbinary) {
+            S("GL_OES_get_program_binary ", prgbinary, 1);
+        }
         if(hardext.prgbinary) {
             gles_glGetIntegerv(GL_NUM_PROGRAM_BINARY_FORMATS_OES, &hardext.prgbin_n);
             SHUT_LOGD("Number of supported Program Binary Format: %d\n", hardext.prgbin_n);
