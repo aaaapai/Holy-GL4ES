@@ -89,7 +89,7 @@ LOCAL_SRC_FILES := \
 	src/glx/gbm.c \
 	src/glx/streaming.c \
 
-LOCAL_CFLAGS += -g -funwind-tables -O3 -fvisibility=hidden -include include/android_debug.h
+LOCAL_CFLAGS += -g -funwind-tables -Ofast -fvisibility=hidden -include include/android_debug.h
 LOCAL_CFLAGS += -DNOX11
 LOCAL_CFLAGS += -DNO_GBM
 #LOCAL_CFLAGS += -DNO_INIT_CONSTRUCTOR
@@ -99,8 +99,7 @@ LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -pol
 //TODO: maybe temporary?
 LOCAL_CFLAGS += -Wno-typedef-redefinition -Wno-dangling-else
 
-LOCAL_LDLIBS := -llog
+LOCAL_LDLIBS := -ldl -llog
 #building as a static lib
 
-LOCAL_CFLAGS += -DSTATICLIB
 include $(BUILD_STATIC_LIBRARY)
