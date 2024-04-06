@@ -8,7 +8,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := gl4es
+LOCAL_MODULE := GL
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 
@@ -88,11 +88,6 @@ LOCAL_SRC_FILES := \
 	src/glx/lookup.c \
 	src/glx/gbm.c \
 	src/glx/streaming.c \
-	src/gl/vgpu/shaderconv.c \
-	src/gl/vgpu/pack/pack.c \
-	src/gl/vgpu/pack/load.c \
-	src/gl/vgpu/pack/Initialization.c \
-
 LOCAL_CFLAGS += -g -funwind-tables -Ofast -fvisibility=hidden -include include/android_debug.h
 LOCAL_CFLAGS += -DNOX11
 LOCAL_CFLAGS += -DNO_GBM
