@@ -493,6 +493,16 @@ void APIENTRY_GL4ES gl4es_glCompressedTexSubImage3D(GLenum target, GLint level, 
     gl4es_glCompressedTexSubImage2D(target, level, xoffset, yoffset, width, height, format, imageSize, data);
 }
 
+void APIENTRY_GL4ES gl4es_glClipControlEXT(GLenum origin, GLenum depthMode) {
+    LOAD_GLES(glClipControlEXT);
+    gles_glClipControlEXT(origin, depthMode);
+}
+
+void APIENTRY_GL4ES gl4es_glClipControl(GLenum origin, GLenum depthMode) {
+    LOAD_GLES(glClipControlEXT);
+    gles_glClipControlEXT(origin, depthMode);
+}
+
 //Direct wrapper
 AliasExport(void,glCompressedTexImage2D,,(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLsizei height, GLint border, GLsizei imageSize, const GLvoid *data));
 AliasExport(void,glCompressedTexImage1D,,(GLenum target, GLint level, GLenum internalformat, GLsizei width, GLint border, GLsizei imageSize, const GLvoid *data));
@@ -520,3 +530,6 @@ AliasExport(void,glCompressedTexSubImage1D,ARB,(GLenum target, GLint level, GLin
 AliasExport(void,glCompressedTexSubImage3D,ARB,(GLenum target, GLint level, GLint xoffset, GLint yoffset, GLint zoffset, GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei imageSize, const GLvoid *data));
 AliasExport(void,glGetCompressedTexImage,ARB,(GLenum target, GLint lod, GLvoid *img));
 
+AliasExport(void,glClipControl,,(GLenum origin, GLenum depthMode));
+AliasExport(void,glClipControl,EXT,(GLenum origin, GLenum depthMode));
+AliasExport(void,glClipControl,ARB,(GLenum origin, GLenum depthMode));
