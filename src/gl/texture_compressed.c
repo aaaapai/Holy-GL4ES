@@ -205,7 +205,7 @@ void APIENTRY_GL4ES gl4es_glCompressedTexImage2D(GLenum target, GLint level, GLe
     GLenum format = GL_RGBA;
     GLenum type = GL_UNSIGNED_BYTE;
         
-    if (isDXTc(internalformat)) {
+    if (!hardext.dxtCompression && isDXTc(internalformat)) {
         if(level && bound->mipmap_auto==1)
             return; // nothing to do
         GLvoid *pixels, *half;
@@ -365,7 +365,7 @@ void APIENTRY_GL4ES gl4es_glCompressedTexSubImage2D(GLenum target, GLint level, 
     int simpleAlpha = 0;
     int complexAlpha = 0;
     int transparent0 = (format==GL_COMPRESSED_RGBA_S3TC_DXT1_EXT || format==GL_COMPRESSED_SRGB_ALPHA_S3TC_DXT1_EXT)?1:0;
-    if (isDXTc(format)) {
+    if (!hardext.dxtCompression && isDXTc(format)) {
         if(level) {
             noerrorShim();
             return;
