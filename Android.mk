@@ -1,3 +1,4 @@
+PLATFORM := android-29
 LOCAL_PATH := $(call my-dir)
 
 ###########################
