@@ -8,7 +8,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := GL
+LOCAL_MODULE := gl4es
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 
@@ -97,9 +97,27 @@ LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -pol
 //TODO: maybe temporary?
 LOCAL_CFLAGS += -Wno-typedef-redefinition -Wno-dangling-else
 
-LOCAL_LDLIBS := -ldl -llog
+LOCAL_LDLIBS := -llog
 #building as a static lib
 
 include $(BUILD_SHARED_LIBRARY)
 
 include $(CLEAR_VARS)
+
+LOCAL_MODULE := gl4es_egl
+
+LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
+
+LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES) -DBCMHOST
+
+LOCAL_SRC_FILES := \
+	src/egl/egl.c \
+        src/egl/lookup.c
+
+LOCAL_CFLAGS += -g -funwind-tables -Ofast -fvisibility=hidden
+
+LOCAL_SHARED_LIBRARIES := gl4es
+
+LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce
+
+include $(BUILD_SHARED_LIBRARY)
