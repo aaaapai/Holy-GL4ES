@@ -8,7 +8,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := gl4es
+LOCAL_MODULE := gl4es_114_ptitseb
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 
@@ -62,6 +62,7 @@ LOCAL_SRC_FILES := \
 	src/gl/queries.c \
 	src/gl/raster.c \
 	src/gl/render.c \
+	src/gl/samplers.c \
 	src/gl/shader.c \
 	src/gl/shaderconv.c \
 	src/gl/shader_hacks.c \
@@ -82,18 +83,20 @@ LOCAL_SRC_FILES := \
 	src/gl/wrap/gles.c \
 	src/gl/wrap/glstub.c \
 	src/gl/math/matheval.c \
+        src/gl/vgpu/shaderconv.c \
 	src/glx/hardext.c \
 	src/glx/glx.c \
 	src/glx/lookup.c \
 	src/glx/gbm.c \
 	src/glx/streaming.c \
-	src/gl/vgpu/shaderconv.c
-
-LOCAL_CFLAGS += -g -std=gnu99 -funwind-tables -O3 -fvisibility=hidden -include include/android_debug.h
+LOCAL_CFLAGS += -g -std=gnu17 -funwind-tables -Ofast -fvisibility=hidden -include include/android_debug.h
 LOCAL_CFLAGS += -DNOX11
 LOCAL_CFLAGS += -DNO_GBM
 #LOCAL_CFLAGS += -DNO_INIT_CONSTRUCTOR
-LOCAL_CFLAGS += -DDEFAULT_ES=2
+LOCAL_CFLAGS += -DDEFAULT_ES=3
+LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce
+//TODO: maybe temporary?
+LOCAL_CFLAGS += -Wno-typedef-redefinition -Wno-dangling-else
 
 LOCAL_LDLIBS := -ldl -llog
 #building as a static lib
@@ -110,11 +113,13 @@ LOCAL_EXPORT_C_INCLUDES := $(LOCAL_C_INCLUDES) -DBCMHOST
 
 LOCAL_SRC_FILES := \
 	src/egl/egl.c \
-                src/egl/lookup.c
+        src/egl/lookup.c
 
-LOCAL_CFLAGS += -g -std=gnu99 -funwind-tables -O3 -fvisibility=hidden
+LOCAL_CFLAGS += -g -std=gnu17 -funwind-tables -Ofast -fvisibility=hidden
 
-LOCAL_SHARED_LIBRARIES := gl4es
+LOCAL_SHARED_LIBRARIES := gl4es_114_ptitseb
+
+LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce
 
 LOCAL_LDLIBS := -ldl
 
