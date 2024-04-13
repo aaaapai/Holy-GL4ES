@@ -44,6 +44,15 @@ void APIENTRY_GL4ES gl4es_glVertexAttribPointer(GLuint index, GLint size, GLenum
         v->real_pointer = 0;
     }
 }
+void gl4es_glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer) {
+	DBG(printf("glVertexAttribIPointer(%d, %d, %s, %d, %p)\n", index, size, PrintEnum(type), stride, pointer));
+	if(!(type == GL_BYTE || type == GL_UNSIGNED_BYTE || type == GL_SHORT || type == GL_UNSIGNED_SHORT || type == GL_INT || type == GL_UNSIGNED_INT)) {
+		errorShim(GL_INVALID_ENUM);
+		return;
+	}
+	gl4es_glVertexAttribPointer(index,size,type,GL_FALSE,stride,pointer);
+}
+void glVertexAttribIPointerEXT(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer) AliasExport("gl4es_glVertexAttribIPointer");
 void APIENTRY_GL4ES gl4es_glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer) {
     DBG(printf("glVertexAttribIPointer(%d, %d, %s, %d, %p), vertex buffer = %p\n", index, size, PrintEnum(type), stride, pointer, (glstate->vao->vertex)?glstate->vao->vertex->data:0);)
     FLUSH_BEGINEND;
