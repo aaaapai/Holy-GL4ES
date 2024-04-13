@@ -1,4 +1,3 @@
-APP_PLATFORM := android-24
 LOCAL_PATH := $(call my-dir)
 
 ###########################
@@ -9,7 +8,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := gl4es
+LOCAL_MODULE := gl4es_114_ptitseb
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 
@@ -84,12 +83,13 @@ LOCAL_SRC_FILES := \
 	src/gl/wrap/gles.c \
 	src/gl/wrap/glstub.c \
 	src/gl/math/matheval.c \
+        src/gl/vgpu/shaderconv.c \
 	src/glx/hardext.c \
 	src/glx/glx.c \
 	src/glx/lookup.c \
 	src/glx/gbm.c \
 	src/glx/streaming.c \
-LOCAL_CFLAGS += -g -funwind-tables -Ofast -fvisibility=hidden -include include/android_debug.h
+LOCAL_CFLAGS += -g -std=gnu17 -funwind-tables -Ofast -fvisibility=hidden -include include/android_debug.h
 LOCAL_CFLAGS += -DNOX11
 LOCAL_CFLAGS += -DNO_GBM
 #LOCAL_CFLAGS += -DNO_INIT_CONSTRUCTOR
@@ -98,7 +98,7 @@ LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -pol
 //TODO: maybe temporary?
 LOCAL_CFLAGS += -Wno-typedef-redefinition -Wno-dangling-else
 
-LOCAL_LDLIBS := -llog
+LOCAL_LDLIBS := -ldl -llog
 #building as a static lib
 
 include $(BUILD_SHARED_LIBRARY)
@@ -115,10 +115,12 @@ LOCAL_SRC_FILES := \
 	src/egl/egl.c \
         src/egl/lookup.c
 
-LOCAL_CFLAGS += -g -funwind-tables -Ofast -fvisibility=hidden
+LOCAL_CFLAGS += -g -std=gnu17 -funwind-tables -Ofast -fvisibility=hidden
 
-LOCAL_SHARED_LIBRARIES := gl4es
+LOCAL_SHARED_LIBRARIES := gl4es_114_ptitseb
 
 LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce
+
+LOCAL_LDLIBS := -ldl
 
 include $(BUILD_SHARED_LIBRARY)
