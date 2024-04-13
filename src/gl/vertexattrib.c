@@ -52,6 +52,7 @@ void gl4es_glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei
 	}
 	gl4es_glVertexAttribPointer(index,size,type,GL_FALSE,stride,pointer);
 }
+void glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer) AliasExport("gl4es_glVertexAttribIPointer");
 void glVertexAttribIPointerEXT(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer) AliasExport("gl4es_glVertexAttribIPointer");
 void APIENTRY_GL4ES gl4es_glVertexAttribIPointer(GLuint index, GLint size, GLenum type, GLsizei stride, const GLvoid * pointer) {
     DBG(printf("glVertexAttribIPointer(%d, %d, %s, %d, %p), vertex buffer = %p\n", index, size, PrintEnum(type), stride, pointer, (glstate->vao->vertex)?glstate->vao->vertex->data:0);)
