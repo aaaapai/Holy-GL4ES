@@ -121,6 +121,4 @@ LOCAL_SHARED_LIBRARIES := gl4es_114_ptitseb
 
 LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce
 
-LOCAL_LDLIBS := -ldl
-
 include $(BUILD_SHARED_LIBRARY)
