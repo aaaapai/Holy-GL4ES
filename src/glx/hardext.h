@@ -1,3 +1,5 @@
+#include "../gl/program.h"
+
 #ifndef _GLX_HARDEXT_H_
 #define _GLX_HARDEXT_H_
 
