@@ -5,8 +5,6 @@ GL4ES - OpenGL for GLES Hardware
 
 ![gl4es build status](https://api.travis-ci.org/ptitSeb/gl4es.png "gl4es build status")
 
-This Branch comes from [PojavLauncherTeam-gl4es-114-extra](https://github.com/PojavLauncherTeam/gl4es-114-extra)
-
 This is a library provide OpenGL 2.x functionality for GLES2.0 accelerated Hardware (and of course also support OpenGL 1.5 function, sometimes better then when using GLES 1.1 backend)
 There is also support for GLES 1.1 Hardware, emulating OpenGL 1.5, and some OpenGL 2.x+ extensions.
 
