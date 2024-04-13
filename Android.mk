@@ -88,17 +88,17 @@ LOCAL_SRC_FILES := \
 	src/glx/glx.c \
 	src/glx/lookup.c \
 	src/glx/gbm.c \
-	src/glx/streaming.c \
-LOCAL_CFLAGS += -g -std=gnu17 -funwind-tables -Ofast -fvisibility=hidden -include include/android_debug.h
+	src/glx/streaming.c
+
+LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce -g -funwind-tables -Ofast -fvisibility=hidden -include include/android_debug.h
 LOCAL_CFLAGS += -DNOX11
 LOCAL_CFLAGS += -DNO_GBM
 #LOCAL_CFLAGS += -DNO_INIT_CONSTRUCTOR
 LOCAL_CFLAGS += -DDEFAULT_ES=3
-LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce
 //TODO: maybe temporary?
 LOCAL_CFLAGS += -Wno-typedef-redefinition -Wno-dangling-else
 
-LOCAL_LDLIBS := -ldl -llog
+LOCAL_LDLIBS := -llog
 #building as a static lib
 
 include $(BUILD_SHARED_LIBRARY)
@@ -115,10 +115,8 @@ LOCAL_SRC_FILES := \
 	src/egl/egl.c \
         src/egl/lookup.c
 
-LOCAL_CFLAGS += -g -std=gnu17 -funwind-tables -Ofast -fvisibility=hidden
+LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce -g -funwind-tables -Ofast -fvisibility=hidden
 
 LOCAL_SHARED_LIBRARIES := gl4es_114_ptitseb
-
-LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce
 
 include $(BUILD_SHARED_LIBRARY)
