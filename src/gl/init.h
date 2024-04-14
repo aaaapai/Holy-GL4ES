@@ -10,7 +10,7 @@ typedef struct _globals4es {
  int mergelist;
  int xrefresh;
  int stacktrace;
- int nodxt;
+ int dxt;
  int usefb;
  int usegbm;
  int usefbo;

@@ -128,7 +128,7 @@ void BuildExtensionsList() {
                 "GL_NV_blend_square "
 //                "GL_EXT_blend_logic_op "
 				);
-        if (globals4es.nodxt == 0)
+        if (globals4es.dxt != 2)
             strcat(extensions, "GL_EXT_texture_compression_s3tc "
                 "GL_OES_texture_compression_S3TC "
                 "GL_EXT_texture_compression_dxt1 "
