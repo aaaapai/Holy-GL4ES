@@ -84,7 +84,7 @@ LOCAL_SRC_FILES := \
 	src/gl/wrap/glstub.c \
 	src/gl/math/matheval.c \
         src/egl/egl.c \
-        src/egl/lookup.c
+        src/egl/lookup.c \
 	src/glx/hardext.c \
 	src/glx/glx.c \
 	src/glx/lookup.c \
