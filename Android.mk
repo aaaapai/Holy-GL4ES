@@ -8,7 +8,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := GL
+LOCAL_MODULE := gl4es_114_ptitseb
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 
@@ -83,14 +83,14 @@ LOCAL_SRC_FILES := \
 	src/gl/wrap/gles.c \
 	src/gl/wrap/glstub.c \
 	src/gl/math/matheval.c \
+  src/egl/egl.c \
+  src/egl/lookup.c \
 	src/glx/hardext.c \
 	src/glx/glx.c \
 	src/glx/lookup.c \
 	src/glx/gbm.c \
-	src/glx/streaming.c \
-        src/gl/libtxc_dxtn/txc_compress_dxtn.c \
-
-LOCAL_CFLAGS += -g -std=gnu99 -funwind-tables -O3 -fvisibility=hidden -include include/android_debug.h
+	src/glx/streaming.c
+LOCAL_CFLAGS +=  -DANDROID -pipe -integrated-as -fno-plt -Ofast -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce -std=gnu17 -funwind-tables -Ofast -fvisibility=hidden -include include/android_debug.h
 LOCAL_CFLAGS += -DNOX11
 LOCAL_CFLAGS += -DNO_GBM
 LOCAL_CFLAGS += -DUSE_ANDROID_LOG=1
@@ -99,8 +99,9 @@ LOCAL_CFLAGS += -DDEFAULT_ES=2
 //TODO: maybe temporary?
 LOCAL_CFLAGS += -Wno-typedef-redefinition -Wno-dangling-else
 
-LOCAL_LDLIBS := -llog
+LOCAL_LDLIBS := -ldl -llog
 #building as a static lib
 
-#LOCAL_CFLAGS += -DSTATICLIB
 include $(BUILD_SHARED_LIBRARY)
+
+include $(CLEAR_VARS)
