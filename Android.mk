@@ -83,8 +83,6 @@ LOCAL_SRC_FILES := \
 	src/gl/wrap/gles.c \
 	src/gl/wrap/glstub.c \
 	src/gl/math/matheval.c \
-        src/gl/libtxc_dxtn/txc_compress_dxtn.c \
-        src/gl/libtxc_dxtn/txc_fetch_dxtn.c \
         src/egl/egl.c \
 	src/glx/glx_stubs.c \
 	src/glx/rpi.c \
@@ -104,7 +102,7 @@ LOCAL_CFLAGS += -DDEFAULT_ES=2
 //TODO: maybe temporary?
 LOCAL_CFLAGS += -Wno-typedef-redefinition -Wno-dangling-else
 
-LOCAL_LDLIBS := -ldl -llog
+LOCAL_LDLIBS := -ldl -llog -landroid -lEGL -lGLESv2
 #building as a static lib
 
 include $(BUILD_SHARED_LIBRARY)
