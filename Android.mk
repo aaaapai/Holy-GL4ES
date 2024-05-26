@@ -8,7 +8,7 @@ LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
 
-LOCAL_MODULE := gl4es_114_ptitseb
+LOCAL_MODULE := ptitseb_gl4es
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/include
 
@@ -98,11 +98,10 @@ LOCAL_CFLAGS +=  -DANDROID -pipe -integrated-as -fno-plt -O3 -flto -mllvm -polly
 LOCAL_CFLAGS += -DNOX11
 LOCAL_CFLAGS += -DNO_GBM
 #LOCAL_CFLAGS += -DNO_INIT_CONSTRUCTOR
-LOCAL_CFLAGS += -DDEFAULT_ES=2
 //TODO: maybe temporary?
 LOCAL_CFLAGS += -Wno-typedef-redefinition -Wno-dangling-else
 
-LOCAL_LDLIBS := -ldl -llog -landroid -lEGL -lGLESv2
+LOCAL_LDLIBS := -ldl -llog -landroid -lEGL
 #building as a static lib
 
 include $(BUILD_SHARED_LIBRARY)
