@@ -94,14 +94,13 @@ LOCAL_SRC_FILES := \
 	src/glx/gbm.c \
 	src/glx/streaming.c \
 	src/gl/host.c
-LOCAL_CFLAGS +=  -DANDROID -pipe -integrated-as -fno-plt -O3 -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce -std=gnu17 -funwind-tables -O3 -fvisibility=hidden -include include/android_debug.h
+LOCAL_CFLAGS += -DANDROID -pipe -integrated-as -fno-plt -O3 -flto -mllvm -polly -mllvm -polly-vectorizer=stripmine -mllvm -polly-invariant-load-hoisting -mllvm -polly-run-inliner -mllvm -polly-run-dce -std=c23 -funwind-tables -O3 -fvisibility=hidden -fno-semantic-interposition -include include/android_debug.h
 LOCAL_CFLAGS += -DNOX11
 LOCAL_CFLAGS += -DNO_GBM
-#LOCAL_CFLAGS += -DNO_INIT_CONSTRUCTOR
 //TODO: maybe temporary?
 LOCAL_CFLAGS += -Wno-typedef-redefinition -Wno-dangling-else
 
-LOCAL_LDLIBS := -ldl -llog -landroid -lEGL
+LOCAL_LDLIBS := -ldl -llog -landroid -lEGL -lGLESv3
 #building as a static lib
 
 include $(BUILD_SHARED_LIBRARY)
