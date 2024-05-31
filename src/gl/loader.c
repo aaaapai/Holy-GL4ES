@@ -74,23 +74,12 @@ static const char *lib_ext[] = {
     NULL,
 };
 
-static const char *gles2_lib[] = {
-    #if defined(BCMHOST)
-    "libbrcmGLESv2",
-    #endif
-    "libGLESv2_CM",
-    "libGLESv2",
-    NULL
-};
-
 static const char *gles_lib[] = {
     #if defined(BCMHOST)
-    "libbrcmGLESv1_CM",
+    "libbrcmGLESv3",
     #endif
-    #if !defined(PYRA)
-    "libGLESv1_CM",
-    #endif
-    "libGLES_CM",
+    "libGLESv3_CM",
+    "libGLESv3",
     NULL
 };
 
