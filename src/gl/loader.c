@@ -96,7 +96,7 @@ static const char *egl_lib[] = {
     #if defined(BCMHOST)
     "libbrcmEGL",
     #endif
-    "lib64/libGLES_android"
+    "lib64/libGLES_android",
     "lib64/libEGL",
     NULL
 };
