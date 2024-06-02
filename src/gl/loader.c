@@ -45,7 +45,7 @@ void *gles = NULL, *egl = NULL, *bcm_host = NULL, *vcos = NULL, *gbm = NULL, *dr
 #ifndef _WIN32
 #ifndef NO_GBM
 static const char *drm_lib[] = {
-    "libdrm",
+    "lib64/libdrmhwomavoneplugin",
     NULL
 };
 static const char *gbm_lib[] = {
