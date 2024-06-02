@@ -79,7 +79,7 @@ static const char *gles2_lib[] = {
     "libbrcmGLESv3",
     #endif
     "libGLESv3_CM",
-    "libGLESv3",
+    "lib64/libGLESv3",
     NULL
 };
 
@@ -96,7 +96,8 @@ static const char *egl_lib[] = {
     #if defined(BCMHOST)
     "libbrcmEGL",
     #endif
-    "libEGL",
+    "lib64/libGLES_android"
+    "lib64/libEGL",
     NULL
 };
 
