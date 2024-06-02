@@ -1,3 +1,4 @@
+#include "host.h"
 #include "planes.h"
 
 #include "../glx/hardext.h"
@@ -20,10 +21,10 @@ void APIENTRY_GL4ES gl4es_glClipPlanef(GLenum plane, const GLfloat *equation)
         return;
     }
     if(hardext.esversion==1) {
-        LOAD_GLES2(glClipPlanef);
+        
         errorGL();
-        gles_glClipPlanef(plane, equation);
-    } else {    // TODO: should first compute the clipplane and compare to stored one before sending to hardware
+        host_functions.glClipPlanef(plane, equation);
+    } else {    // TODO: should fist compute the clipplane and compare to stored one before sending to hardware
         int p = plane-GL_CLIP_PLANE0;
         matrix_vector(getInvMVMat(), equation, glstate->planes[p]); //Tested, seems ok
         noerrorShim();
