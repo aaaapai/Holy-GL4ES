@@ -65,7 +65,7 @@ GLuint APIENTRY_GL4ES gl4es_glCreateShader(GLenum shaderType) {
     return shader;
 }
 
-void actualy_deleteshader(GLuint shader) {
+void actually_deleteshader(GLuint shader) {
     khint_t k;
     khash_t(shaderlist) *shaders = glstate->glsl->shaders;
     k = kh_get(shaderlist, shaders, shader);
@@ -82,14 +82,14 @@ void actualy_deleteshader(GLuint shader) {
     }
 }
 
-void actualy_detachshader(GLuint shader) {
+void actually_detachshader(GLuint shader) {
     khint_t k;
     khash_t(shaderlist) *shaders = glstate->glsl->shaders;
     k = kh_get(shaderlist, shaders, shader);
     if (k != kh_end(shaders)) {
         shader_t *glshader = kh_value(shaders, k);
         if((--glshader->attached)<1 && glshader->deleted)
-            actualy_deleteshader(shader); 
+            actually_deleteshader(shader); 
     }
 }
 
@@ -105,7 +105,7 @@ void APIENTRY_GL4ES gl4es_glDeleteShader(GLuint shader) {
     glshader->deleted = 1;
     noerrorShim();
     if(!glshader->attached) {
-        actualy_deleteshader(shader);
+        actually_deleteshader(shader);
 
         // delete the shader in GLES2 hardware (if any)
         
