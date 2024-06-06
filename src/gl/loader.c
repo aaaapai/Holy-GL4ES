@@ -45,7 +45,6 @@ void *gles = NULL, *egl = NULL, *bcm_host = NULL, *vcos = NULL, *gbm = NULL, *dr
 #ifndef _WIN32
 #ifndef NO_GBM
 static const char *drm_lib[] = {
-    "libdrmhwomavoneplugin",
     "libdrm",
     NULL
 };
@@ -97,7 +96,6 @@ static const char *egl_lib[] = {
     #if defined(BCMHOST)
     "libbrcmEGL",
     #endif
-    "libGLES_android",
     "libEGL",
     NULL
 };
