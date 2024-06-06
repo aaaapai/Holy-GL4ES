@@ -201,7 +201,7 @@ void initialize_gl4es() {
         break;
       default:
         // automatic GL version selection
-        globals4es.gl = (globals4es.es==1)?15:21;  // forcing GL 1.5 for es1.1 and GL 2.1 for es2.0
+        globals4es.gl = (globals4es.es==1)?15:44;  // forcing GL 1.5 for es1.1 and GL 2.1 for es2.0
         break;
     }
 
